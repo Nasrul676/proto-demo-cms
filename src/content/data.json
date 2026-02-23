@@ -1,0 +1,10 @@
+{
+  "companyName": "PT. Berkah Jajanan Pare",
+  "tagline": "Kualitas Terbaik, Rasa Otentik",
+  "aboutText": "Kami adalah perusahaan yang bergerak di bidang kuliner tradisional sejak tahun 2020.",
+  "services": [
+    { "name": "Katering Harian", "desc": "Menu sehat setiap hari." },
+    { "name": "Snack Box", "desc": "Cocok untuk rapat dan acara." }
+  ],
+  "whatsapp": "628123456789"
+}

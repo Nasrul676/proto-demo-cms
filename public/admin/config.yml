@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "company_profile"
+    label: "Profil Perusahaan"
+    files:
+      - file: "src/content/data.json"
+        label: "Konten Utama"
+        name: "data"
+        fields:
+          - { label: "Nama Perusahaan", name: "companyName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Tentang Kami", name: "aboutText", widget: "text" }
+          - label: "Layanan Kami"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Nama Layanan", name: "name", widget: "string" }
+              - { label: "Deskripsi Singkat", name: "desc", widget: "string" }
+          - { label: "Nomor WhatsApp", name: "whatsapp", widget: "string" }
