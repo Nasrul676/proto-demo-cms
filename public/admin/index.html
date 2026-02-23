@@ -7,35 +7,23 @@
 </head>
 <body>
   <script>
-  // Fungsi untuk mengecek token secara berulang sampai widget siap
-  const checkTokenAndOpenModal = () => {
     if (window.netlifyIdentity) {
-      const hash = window.location.hash;
-      if (hash.includes('invite_token') || hash.includes('confirmation_token')) {
-        console.log("Token terdeteksi, membuka modal...");
-        // Beri jeda sedikit agar widget benar-benar siap render
-        setTimeout(() => {
-          window.netlifyIdentity.open();
-        }, 800);
-      }
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          // Handle login redirect
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+          
+          // Handle email invitation/confirmation tokens
+          const hash = window.location.hash;
+          if (hash.includes("_token=")) {
+            document.location.href = "/admin/" + hash;
+          }
+        }
+      });
     }
-  };
-
-  // Jalankan saat script Identity terinisialisasi
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        checkTokenAndOpenModal();
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  } else {
-    // Cadangan: jika init terlewat, jalankan saat window load
-    window.addEventListener('load', checkTokenAndOpenModal);
-  }
-</script>
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
