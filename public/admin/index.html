@@ -4,11 +4,20 @@
   <meta charset="utf-8" />
   <title>Admin Panel - Mas Nasrul Dev</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <script>
   if (window.netlifyIdentity) {
+    // Fungsi untuk memaksa modal terbuka jika ada token di URL
+    window.addEventListener('load', () => {
+      const hash = window.location.hash;
+      if (hash.includes('confirmation_token') || hash.includes('invite_token')) {
+        console.log("Token ditemukan, membuka modal...");
+        window.netlifyIdentity.open(); // Membuka modal secara paksa
+      }
+    });
+
+    // Logika redirect setelah berhasil login
     window.netlifyIdentity.on("init", user => {
       if (!user) {
         window.netlifyIdentity.on("login", () => {
