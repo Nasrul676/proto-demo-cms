@@ -24,6 +24,14 @@
       });
     }
   </script>
+  <script>
+    if (window.location.hash.includes("invite_token")) {
+      const hash = window.location.hash;
+      // Redirects from /#invite_token=... to /admin/#invite_token=...
+      window.location.assign("/admin/" + hash);
+    }
+  </script>
+
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
